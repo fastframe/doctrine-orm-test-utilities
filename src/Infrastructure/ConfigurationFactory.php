@@ -11,7 +11,7 @@ use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\ORM\Mapping\Driver\XmlDriver;
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\Persistence\Mapping\Driver\MappingDriver;
-use FastFrame\Doctrine\Utility\DoctrineTestCase;
+use FastFrame\Doctrine\Utility\TestCase;
 use Webfactory\Doctrine\ORMTestInfrastructure\ConfigurationFactory as TestInfrastructureConfigurationFactory;
 use Webfactory\Doctrine\ORMTestInfrastructure\EntityListDriverDecorator;
 
@@ -43,6 +43,6 @@ class ConfigurationFactory
 	 */
 	protected function resolvePrimaryDriver(): MappingDriver
 	{
-		return static::$driver ?? (static::$driver = new XmlDriver(DoctrineTestCase::doctrineMetadataPath()));
+		return static::$driver ?? (static::$driver = new XmlDriver(TestCase::doctrineMetadataPath()));
 	}
 }
