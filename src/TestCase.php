@@ -113,15 +113,17 @@ abstract class TestCase
 	 *
 	 * @throws \Doctrine\DBAL\DBALException
 	 */
-	protected function registerDoctrineTypes(EntityManager $em)
+	protected function registerDoctrineTypes(?EntityManager $em = null)
 	{
 		foreach ($this->doctrineTypeMap as $name => $def) {
 			Type::addType($name, $def[1]);
 		}
 
-		$platform = $em->getConnection()->getDatabasePlatform();
-		foreach ($this->doctrineEnumMap as $name => $def) {
-			$platform->registerDoctrineTypeMapping($def[0], $name);
+		if ($em) {
+			$platform = $em->getConnection()->getDatabasePlatform();
+			foreach ($this->doctrineEnumMap as $name => $def) {
+				$platform->registerDoctrineTypeMapping($def[0], $name);
+			}
 		}
 	}
 
@@ -134,7 +136,7 @@ abstract class TestCase
 	 *
 	 * @throws \Doctrine\DBAL\DBALException
 	 */
-	protected function registerDoctrineEnumTypes(EntityManager $em)
+	protected function registerDoctrineEnumTypes(?EntityManager $em = null)
 	{
 		if (!class_exists(PhpEnumType::class) || empty($this->doctrineEnumMap)) {
 			return;
@@ -142,9 +144,11 @@ abstract class TestCase
 
 		PhpEnumType::registerEnumTypes($this->doctrineEnumMap);
 
-		$platform = $em->getConnection()->getDatabasePlatform();
-		foreach ($this->doctrineEnumMap as $name => $class) {
-			$platform->registerDoctrineTypeMapping('VARCHAR', $name);
+		if ($em) {
+			$platform = $em->getConnection()->getDatabasePlatform();
+			foreach ($this->doctrineEnumMap as $name => $class) {
+				$platform->registerDoctrineTypeMapping('VARCHAR', $name);
+			}
 		}
 	}
 }
