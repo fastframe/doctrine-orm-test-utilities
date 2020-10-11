@@ -1,0 +1,38 @@
+{
+  "name": "fastframe/doctrine-orm-test-utilities",
+  "type": "library",
+  "description": "FastFrame Doctrine ORM test utilities",
+  "require": {
+    "php": ">=7.2",
+    "doctrine/orm": "^2.7",
+    "webfactory/doctrine-orm-test-infrastructure": "dev-master"
+  },
+  "require-dev": {
+    "phpstan/phpstan": "^0.12.48",
+    "phpunit/phpunit": "~8.0|~9.0",
+    "syberisle/coding-standards": "^2.0",
+    "sebastian/phpcpd": "^4.1",
+    "roave/security-advisories": "dev-latest"
+  },
+  "autoload": {
+    "psr-4": {
+      "FastFrame\\Doctrine\\Utility\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "FastFrame\\Doctrine\\Utility\\": "tests"
+    },
+    "classmap": [
+      "tests/_files/src"
+    ]
+  },
+  "scripts": {
+    "test": "@php vendor/bin/phpunit --colors=always",
+    "test-coverage": "@php vendor/bin/phpunit --colors=always --coverage-html=build/html-coverage",
+    "sniff": "@php vendor/bin/phpcs",
+    "phpcpd": "@php vendor/bin/phpcpd src tests",
+    "phpcs": "@php vendor/bin/phpcs",
+    "phpstan": "@php -d memory_limit=-1 vendor/bin/phpstan analyse src"
+  }
+}
