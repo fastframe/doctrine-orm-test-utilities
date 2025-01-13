@@ -5,7 +5,7 @@
   "require": {
     "php": ">=7.2",
     "doctrine/orm": "^2.7",
-    "webfactory/doctrine-orm-test-infrastructure": "dev-master"
+    "webfactory/doctrine-orm-test-infrastructure": "^1.0"
   },
   "require-dev": {
     "phpstan/phpstan": "^0.12.48",
